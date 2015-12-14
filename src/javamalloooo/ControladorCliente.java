@@ -31,8 +31,9 @@ public class ControladorCliente {
         c.setPaterno(paterno);
         DAOCliente d=new DAOCliente();
         d.guardar(c);
-      
+        return "Registro guardado";
     }
+
     //Bloque del metodo respuesta clientes que no estan en el dominio.
     @CrossOrigin
      @RequestMapping(value="/cliente",method=RequestMethod.GET,
@@ -44,5 +45,17 @@ public class ControladorCliente {
     return mapper.writeValueAsString(clientes);
     }
     
+    /*
+    Buscar Todos
+    */
     
+    @CrossOrigin
+    @RequestMapping(value="/cliente", method=RequestMethod.GET,headers={"Accept=application/json"})
+@ResponseBody String guardarTodos()throws Exception{
+DAOCliente d=new DAOCliente();
+ArrayList<Cliente> clientes=d.buscarTodos();
+ObjectMapper mapper=new ObjectMapper();
+return mapper.writeValueAsString(clientes);
 }
+}
+
